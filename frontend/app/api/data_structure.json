@@ -1,0 +1,61 @@
+{
+	"data": {
+		"id": 1,
+		"attributes": {
+			"name": "Sasha Bemotoff",
+			"designation": "senior researcher",
+			"description": "creating technical systems with optimal parametes",
+			"email": "bemotic@gmail.com",
+			"phone": "+380506319070",
+			"address": "Vokzalna, 23 app 11,\nHlevakha, Ukraine 08631",
+			"Github": "https://github",
+			"Facebook": "https://facebook",
+			"LinkedIn": "https://linkedin",
+			"twitter": "bemot",
+			"StackOverflow": "@bemot",
+			"leetcode": "@leetcode.bemot",
+			"devUsername": "bemot",
+			"resume": "https://docs.google",
+			"createdAt": "2024-07-27T20:24:33.283Z",
+			"updatedAt": "2024-07-27T20:35:51.328Z",
+			"publishedAt": "2024-07-27T20:24:36.039Z",
+			"profile": {
+				"data": {
+					"id": 1,
+					"attributes": {
+						"name": "sasha_2020.png",
+						"alternativeText": null,
+						"caption": null,
+						"width": 352,
+						"height": 410,
+						"formats": {
+							"thumbnail": {
+								"name": "thumbnail_sasha_2020.png",
+								"hash": "thumbnail_sasha_2020_8c5f358e7b",
+								"ext": ".png",
+								"mime": "image/png",
+								"path": null,
+								"width": 134,
+								"height": 156,
+								"size": 57.29,
+								"sizeInBytes": 57294,
+								"url": "/uploads/thumbnail_sasha_2020_8c5f358e7b.png"
+							}
+						},
+						"hash": "sasha_2020_8c5f358e7b",
+						"ext": ".png",
+						"mime": "image/png",
+						"size": 82.78,
+						"url": "/uploads/sasha_2020_8c5f358e7b.png",
+						"previewUrl": null,
+						"provider": "local",
+						"provider_metadata": null,
+						"createdAt": "2024-07-27T20:20:39.197Z",
+						"updatedAt": "2024-07-27T20:20:39.197Z"
+					}
+				}
+			}
+		}
+	},
+	"meta": {}
+}
