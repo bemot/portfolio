@@ -11,31 +11,12 @@ import { MdAlternateEmail } from "react-icons/md";
 import ContactWithCaptcha from "./contact-with-captcha";
 import ContactWithoutCaptcha from "./contact-without-captcha";
 
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 //import { getStrapiURL } from "../../../../utils/api-helpers";
 
-import fetchStrapiPersonalData from "../../../../utils/data/personal-data"; // Adjust the import path as needed
+//import fetchStrapiPersonalData from "../../../../utils/data/personaldata_strapi"; // Adjust the import path as needed
 
-const ContactSection = () => {
-  const [personalData, setPersonalData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchStrapiPersonalData();
-        //console.log("data in about = ", data);
-        setPersonalData(data); // Assuming data is already an object with necessary fields
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchData();
-  }, []); // This effect runs only once on component mount
-
-  if (!personalData) {
-    return <div>Loading...</div>;
-  }
+const ContactSection = ({ data }) => {
   //console.log("personalData = ", personalData);
   const {
     email,
@@ -46,7 +27,7 @@ const ContactSection = () => {
     twitter,
     LinkedIn,
     text_to_client,
-  } = personalData.strapi_personal_data.attributes; // Destructure to extract description
+  } = data.strapi_personal_data.attributes; // Destructure to extract description
   console.log(text_to_client);
   return (
     <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">

@@ -8,34 +8,15 @@ import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import lottieFile from "/public/lottie/study.json";
 
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import Image from "next/image";
 //import { getStrapiURL } from "../../../../utils/api-helpers";
 
-import fetchStrapiEducationData from "../../../../utils/data/educations_strapi";
+//import fetchStrapiEducationData from "../../../../utils/data/educations_strapi";
 
-const EducationSection = () => {
-  const [educationData, setEducationData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchStrapiEducationData();
-        //console.log("data in education = ", data);
-        setEducationData(data); // Assuming data is already an object with necessary fields
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchData();
-  }, []); // This effect runs only once on component mount
-
-  if (!educationData) {
-    return <div>Loading...</div>;
-  }
-  //console.log("educationData = ", educationData);
-  const educations = educationData.strapi_education_data; // Destructure to extract description
+const EducationSection = ({ data }) => {
+  console.log("educationData new = ", data);
+  const educations = data.strapi_education_data; // Destructure to extract description
   //const { url } =personalData.strapi_personal_data.attributes.profile.data.attributes;
   //console.log("educations = ", educations);
   //const pictureURL = getStrapiURL(url);

@@ -3,32 +3,10 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getStrapiURL } from "../../../../utils/api-helpers";
 
-import fetchStrapiPersonalData from "../../../../utils/data/personal-data"; // Adjust the import path as needed
-
-const AboutSection = () => {
-  const [personalData, setPersonalData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchStrapiPersonalData();
-        //console.log("data in about = ", data);
-        setPersonalData(data); // Assuming data is already an object with necessary fields
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchData();
-  }, []); // This effect runs only once on component mount
-
-  if (!personalData) {
-    return <div>Loading...</div>;
-  }
+const AboutSection = ({ data }) => {
   //console.log("personalData = ", personalData);
-  const { description } = personalData.strapi_personal_data.attributes; // Destructure to extract description
-  const { url } =
-    personalData.strapi_personal_data.attributes.profile.data.attributes;
+  const { description } = data.strapi_personal_data.attributes; // Destructure to extract description
+  const { url } = data.strapi_personal_data.attributes.profile.data.attributes;
   //console.log(description, url);
   const pictureURL = getStrapiURL(url);
   return (

@@ -8,32 +8,13 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import experience from "/public/lottie/code.json";
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 //import { getStrapiURL } from "../../../../utils/api-helpers";
 
-import fetchStrapiExperienceData from "../../../../utils/data/experience_strapi";
-const ExperienceSection = () => {
-  const [experienceData, setExperienceData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchStrapiExperienceData();
-        //console.log("data in experience = ", data);
-        setExperienceData(data); // Assuming data is already an object with necessary fields
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchData();
-  }, []); // This effect runs only once on component mount
-
-  if (!experienceData) {
-    return <div>Loading...</div>;
-  }
-  //console.log("experienceData = ", experienceData);
-  const experiences = experienceData.strapi_experience_data; // Destructure to extract description
+//import fetchStrapiExperienceData from "../../../../utils/data/experience_strapi";
+const ExperienceSection = ({ data }) => {
+  console.log("experienceData = ", data);
+  const experiences = data.strapi_experience_data; // Destructure to extract description
   console.log("experiences = ", experiences);
   //const pictureURL = getStrapiURL(url);
 

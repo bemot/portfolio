@@ -8,31 +8,10 @@ import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import { getStrapiURL } from "../../../../utils/api-helpers";
 
-import fetchStrapiPersonalData from "../../../../utils/data/personal-data"; // Adjust the import path as needed
-
-const HeroSection = () => {
-  const [personalData, setPersonalData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchStrapiPersonalData();
-        //console.log("data in about = ", data);
-        setPersonalData(data); // Assuming data is already an object with necessary fields
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchData();
-  }, []); // This effect runs only once on component mount
-
-  if (!personalData) {
-    return <div>Loading...</div>;
-  }
+const HeroSection = ({ data }) => {
   //console.log("personalData = ", personalData);
   const {
     name,
@@ -45,9 +24,8 @@ const HeroSection = () => {
     Github,
     twitter,
     StackOverflow,
-  } = personalData.strapi_personal_data.attributes; // Destructure to extract description
-  const { url } =
-    personalData.strapi_personal_data.attributes.resume.data.attributes;
+  } = data.strapi_personal_data.attributes; // Destructure to extract description
+  const { url } = data.strapi_personal_data.attributes.resume.data.attributes;
   const resumeURL = getStrapiURL(url);
 
   return (
