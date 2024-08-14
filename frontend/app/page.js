@@ -1,15 +1,17 @@
-"use client";
+"use client"; // Enable the client-side rendering mode
 // Import necessary modules
-import React, { useState, useEffect } from "react";
-import AboutSection from "./components/homepage/about";
-import Blog from "./components/homepage/blog";
-import ContactSection from "./components/homepage/contact";
-import Education from "./components/homepage/education";
-import Experience from "./components/homepage/experience";
-import HeroSection from "./components/homepage/hero-section";
-import Projects from "./components/homepage/projects";
-import Skills from "./components/homepage/skills";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import Spinner from "./components/spinner"; // Import the spinner component
+
+// Lazy load components
+const HeroSection = lazy(() => import("./components/homepage/hero-section"));
+const AboutSection = lazy(() => import("./components/homepage/about"));
+const Experience = lazy(() => import("./components/homepage/experience"));
+const Skills = lazy(() => import("./components/homepage/skills"));
+const Projects = lazy(() => import("./components/homepage/projects"));
+const Education = lazy(() => import("./components/homepage/education"));
+const Blog = lazy(() => import("./components/homepage/blog"));
+const ContactSection = lazy(() => import("./components/homepage/contact"));
 
 import fetchStrapiExperienceData from "../utils/data/experience_strapi.js";
 import fetchStrapiEducationData from "../utils/data/educations_strapi";
@@ -28,22 +30,22 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const experienceData = await fetchStrapiExperienceData();
-        const educationData = await fetchStrapiEducationData();
-        const personalData = await fetchStrapiPersonalData();
-        const res = await fetch(
-          "https://dev.to/api/articles?username=said7388",
-        );
+        const [experienceData, educationData, personalData, res] =
+          await Promise.all([
+            fetchStrapiExperienceData(),
+            fetchStrapiEducationData(),
+            fetchStrapiPersonalData(),
+            fetch("https://dev.to/api/articles?username=said7388"),
+          ]);
 
         if (!res.ok) {
           throw new Error("Failed to fetch data");
         }
 
-        const data = await res.json();
-
-        const filtered = data
-          .filter((item) => item?.cover_image)
-          .sort(() => Math.random() - 0.5);
+        const articles = await res.json();
+        const filtered = articles
+          .filter((article) => article?.cover_image)
+          .sort(() => 0.5 - Math.random());
 
         setData({ personalData, educationData, experienceData, filtered });
       } catch (error) {
@@ -61,7 +63,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <Suspense fallback={<Spinner />}>
       <HeroSection data={data.personalData} />
       <AboutSection data={data.personalData} />
       <Experience data={data.experienceData} />
@@ -70,6 +72,6 @@ export default function Home() {
       <Education data={data.educationData} />
       <Blog blogs={data.filtered} />
       <ContactSection data={data.personalData} />
-    </>
+    </Suspense>
   );
 }

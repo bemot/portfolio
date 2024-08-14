@@ -23,6 +23,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-icons": "^4.11.0",
     "react-toastify": "^10.0.4",
+    "sharp": "^0.33.4",
     "transcript": "^0.0.6"
   },
   "devDependencies": {
