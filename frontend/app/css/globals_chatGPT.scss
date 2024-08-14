@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-default: 211, 216, 232; // Light theme text color
+  --foreground-dark: 255, 255, 255; // Dark theme text color
+  --background-color: #0d1224; // Background color
+  --sticky-card-offset: 5rem; // Increased offset to prevent overlap
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: var(--foreground-dark);
+  }
+}
+
+body {
+  @apply text-gray-200 bg-gray-900;
+  color: rgb(var(--foreground-rgb, var(--foreground-default)));
+  background-color: var(--background-color);
+}
+
+.sticky-card {
+  @apply relative mb-10 p-6 rounded-lg shadow-lg bg-gray-800 text-white; // Increased bottom margin
+  top: calc(
+    var(--index) * var(--sticky-card-offset)
+  ); // Adjusted for better spacing
+}
+
+#sticky-card-1 {
+  --index: 1;
+}
+
+#sticky-card-2 {
+  --index: 2;
+}
+
+#sticky-card-3 {
+  --index: 3;
+}
+
+#sticky-card-4 {
+  --index: 4;
+}
