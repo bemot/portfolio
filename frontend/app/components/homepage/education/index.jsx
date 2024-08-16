@@ -1,5 +1,5 @@
 // @flow strict
-"use client";
+//"use client";
 //import Image from "next/image";
 
 //import { educations } from "../../../../utils/data/educations";

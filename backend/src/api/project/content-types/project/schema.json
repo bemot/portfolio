@@ -15,14 +15,33 @@
     "name": {
       "type": "string"
     },
-    "tools": {
-      "type": "string"
-    },
-    "myrole": {
+    "role": {
       "type": "string"
     },
     "description": {
+      "type": "text"
+    },
+    "code": {
       "type": "string"
+    },
+    "demo": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tools": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tool.tool"
     }
   }
 }

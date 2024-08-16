@@ -16,13 +16,14 @@ const ContactSection = lazy(() => import("./components/homepage/contact"));
 import fetchStrapiExperienceData from "../utils/data/experience_strapi.js";
 import fetchStrapiEducationData from "../utils/data/educations_strapi";
 import fetchStrapiPersonalData from "../utils/data/personaldata_strapi";
-
+import fetchStrapiProjectsData from "../utils/data/projects_strapi";
 // Main component
 export default function Home() {
   const [data, setData] = useState({
     personalData: null,
     educationData: null,
     experienceData: null,
+    projectsData: null,
     filtered: null,
   });
   const [loading, setLoading] = useState(true);
@@ -30,11 +31,12 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [experienceData, educationData, personalData, res] =
+        const [experienceData, educationData, personalData, projectsData, res] =
           await Promise.all([
             fetchStrapiExperienceData(),
             fetchStrapiEducationData(),
             fetchStrapiPersonalData(),
+            fetchStrapiProjectsData(),
             fetch("https://dev.to/api/articles?username=said7388"),
           ]);
 
@@ -47,7 +49,13 @@ export default function Home() {
           .filter((article) => article?.cover_image)
           .sort(() => 0.5 - Math.random());
 
-        setData({ personalData, educationData, experienceData, filtered });
+        setData({
+          personalData,
+          educationData,
+          experienceData,
+          projectsData,
+          filtered,
+        });
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {
@@ -68,7 +76,7 @@ export default function Home() {
       <AboutSection data={data.personalData} />
       <Experience data={data.experienceData} />
       <Skills />
-      <Projects />
+      <Projects data={data.projectsData} />
       <Education data={data.educationData} />
       <Blog blogs={data.filtered} />
       <ContactSection data={data.personalData} />

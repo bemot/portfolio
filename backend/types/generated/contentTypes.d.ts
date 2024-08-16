@@ -917,9 +917,16 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    tools: Attribute.String;
-    myrole: Attribute.String;
-    description: Attribute.String;
+    role: Attribute.String;
+    description: Attribute.Text;
+    code: Attribute.String;
+    demo: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    tools: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::tool.tool'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -934,6 +941,28 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiToolTool extends Schema.CollectionType {
+  collectionName: 'tools';
+  info: {
+    singularName: 'tool';
+    pluralName: 'tools';
+    displayName: 'tool';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    toolname: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -960,6 +989,7 @@ declare module '@strapi/types' {
       'api::experience.experience': ApiExperienceExperience;
       'api::personal-data.personal-data': ApiPersonalDataPersonalData;
       'api::project.project': ApiProjectProject;
+      'api::tool.tool': ApiToolTool;
     }
   }
 }
