@@ -856,6 +856,40 @@ export interface ApiExperienceExperience extends Schema.CollectionType {
   };
 }
 
+export interface ApiLeadFormSubmissionLeadFormSubmission
+  extends Schema.CollectionType {
+  collectionName: 'lead_form_submissions';
+  info: {
+    singularName: 'lead-form-submission';
+    pluralName: 'lead-form-submissions';
+    displayName: 'Lead form submission';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.Email;
+    status: Attribute.Enumeration<['status 1', 'status 2', 'status 3']>;
+    theme: Attribute.Enumeration<['theme 1', 'theme 2', 'theme 3']>;
+    message: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lead-form-submission.lead-form-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lead-form-submission.lead-form-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPersonalDataPersonalData extends Schema.SingleType {
   collectionName: 'personal_datas';
   info: {
@@ -987,6 +1021,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::education.education': ApiEducationEducation;
       'api::experience.experience': ApiExperienceExperience;
+      'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;
       'api::personal-data.personal-data': ApiPersonalDataPersonalData;
       'api::project.project': ApiProjectProject;
       'api::tool.tool': ApiToolTool;

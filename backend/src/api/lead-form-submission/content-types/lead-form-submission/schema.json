@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lead_form_submissions",
+  "info": {
+    "singularName": "lead-form-submission",
+    "pluralName": "lead-form-submissions",
+    "displayName": "Lead form submission"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "status 1",
+        "status 2",
+        "status 3"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "theme 1",
+        "theme 2",
+        "theme 3"
+      ]
+    },
+    "message": {
+      "type": "text"
+    }
+  }
+}
