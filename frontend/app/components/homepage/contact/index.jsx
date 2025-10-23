@@ -18,6 +18,8 @@ import ContactWithoutCaptcha from "./contact-without-captcha";
 
 const ContactSection = ({ data }) => {
   //console.log("personalData = ", personalData);
+  if (!data?.strapi_personal_data?.attributes) return null;
+  
   const {
     email,
     phone,
@@ -27,7 +29,7 @@ const ContactSection = ({ data }) => {
     twitter,
     LinkedIn,
     text_to_client,
-  } = data.strapi_personal_data.attributes; // Destructure to extract description
+  } = data.strapi_personal_data.attributes;
   console.log(text_to_client);
   return (
     <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">

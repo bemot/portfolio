@@ -4,9 +4,11 @@ import ProjectCard from "./project-card";
 
 const ProjectsSection = ({ data }) => {
   console.log("projectsData = ", data);
-  const projects = data.strapi_projects_data; // Destructure to extract description
+  const projects = data?.strapi_projects_data || [];
   //console.log("projects = ", projects);
   //const pictureURL = getStrapiURL(url);
+
+  if (projects.length === 0) return null;
 
   return (
     <div id="projects" className="relative z-50  my-12 lg:my-24">

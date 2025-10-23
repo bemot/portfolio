@@ -1,22 +1,28 @@
-// @flow strict
-//"use client";
-
-//import { experiences } from "../../../../utils/data/experience";
-
+"use client";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { BsPersonWorkspace } from "react-icons/bs";
-import AnimationLottie from "../../helper/animation-lottie";
-import GlowCard from "../../helper/glow-card";
 import experience from "/public/lottie/code.json";
+
+const AnimationLottie = dynamic(() => import("../../helper/animation-lottie"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full flex items-center justify-center"><div className="animate-pulse bg-[#1a1443] rounded-lg w-full h-64"></div></div>
+});
+const GlowCard = dynamic(() => import("../../helper/glow-card"), {
+  ssr: false,
+  loading: () => <div className="bg-[#101123] border border-[#2a2e5a] rounded-xl p-3 sm:p-5"><div className="animate-pulse h-20 bg-[#1a1443] rounded"></div></div>
+});
 //import React, { useState, useEffect } from "react";
 //import { getStrapiURL } from "../../../../utils/api-helpers";
 
 //import fetchStrapiExperienceData from "../../../../utils/data/experience_strapi";
 const ExperienceSection = ({ data }) => {
   console.log("experienceData = ", data);
-  const experiences = data.strapi_experience_data; // Destructure to extract description
+  const experiences = data?.strapi_experience_data || [];
   console.log("experiences = ", experiences);
   //const pictureURL = getStrapiURL(url);
+
+  if (experiences.length === 0) return null;
 
   return (
     <div

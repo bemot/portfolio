@@ -11,7 +11,18 @@ module.exports = {
       "127.0.0.1",
       "res.cloudinary.com",
       "media.dev.to",
+      "media2.dev.to",
+      "dev-to-uploads.s3.amazonaws.com",
     ],
+    formats: ['image/avif', 'image/webp'],
+  },
+  compress: true,
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  experimental: {
+    optimizePackageImports: ['react-icons', 'lottie-react'],
   },
 };
 

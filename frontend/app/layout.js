@@ -1,4 +1,3 @@
-//import { dynamic } from "force-dynamic";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
@@ -9,12 +8,22 @@ import "./css/card.scss";
 import "./css/globals.scss";
 import ScrollToTop from "./components/helper/scroll-to-top";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const inter = Inter({ 
+  subsets: ["latin", "cyrillic"],
+  display: 'swap',
+  preload: true,
+});
 
 export const metadata = {
   title: "Portfolio of Sasha Bemotoff - Scientist",
   description:
     "This is the portfolio of Sasha Bemotoff. I am a scientific researcher.",
+  keywords: "portfolio, scientist, researcher, Sasha Bemotoff",
+  openGraph: {
+    title: "Portfolio of Sasha Bemotoff - Scientist",
+    description: "This is the portfolio of Sasha Bemotoff. I am a scientific researcher.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {

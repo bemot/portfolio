@@ -1,14 +1,14 @@
-//"use client";
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getStrapiURL } from "../../../../utils/api-helpers";
 
 const AboutSection = ({ data }) => {
   //console.log("personalData = ", personalData);
-  const { description } = data.strapi_personal_data.attributes; // Destructure to extract description
-  const { url } = data.strapi_personal_data.attributes.profile.data.attributes;
+  if (!data?.strapi_personal_data?.attributes) return null;
+  
+  const { description } = data.strapi_personal_data.attributes;
+  const { url } = data.strapi_personal_data.attributes.profile?.data?.attributes || {};
   //console.log(description, url);
-  const pictureURL = getStrapiURL(url);
+  const pictureURL = url ? getStrapiURL(url) : '/placeholder.jpg';
   return (
     <div id="about" className="my-12 lg:my-16 relative">
       <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">

@@ -13,6 +13,8 @@ import { getStrapiURL } from "../../../../utils/api-helpers";
 
 const HeroSection = ({ data }) => {
   //console.log("personalData = ", personalData);
+  if (!data?.strapi_personal_data?.attributes) return null;
+  
   const {
     name,
     designation,
@@ -24,9 +26,9 @@ const HeroSection = ({ data }) => {
     Github,
     twitter,
     StackOverflow,
-  } = data.strapi_personal_data.attributes; // Destructure to extract description
-  const { url } = data.strapi_personal_data.attributes.resume.data.attributes;
-  const resumeURL = getStrapiURL(url);
+  } = data.strapi_personal_data.attributes;
+  const { url } = data.strapi_personal_data.attributes.resume?.data?.attributes || {};
+  const resumeURL = url ? getStrapiURL(url) : '#';
 
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">

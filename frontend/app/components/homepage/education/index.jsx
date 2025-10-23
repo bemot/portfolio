@@ -1,25 +1,29 @@
-// @flow strict
-//"use client";
-//import Image from "next/image";
-
-//import { educations } from "../../../../utils/data/educations";
+"use client";
+import dynamic from "next/dynamic";
 import { BsPersonWorkspace } from "react-icons/bs";
-import AnimationLottie from "../../helper/animation-lottie";
-import GlowCard from "../../helper/glow-card";
 import lottieFile from "/public/lottie/study.json";
-
-//import React, { useState, useEffect } from "react";
 import Image from "next/image";
+
+const AnimationLottie = dynamic(() => import("../../helper/animation-lottie"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full flex items-center justify-center"><div className="animate-pulse bg-[#1a1443] rounded-lg w-full h-64"></div></div>
+});
+const GlowCard = dynamic(() => import("../../helper/glow-card"), {
+  ssr: false,
+  loading: () => <div className="bg-[#101123] border border-[#2a2e5a] rounded-xl p-3 sm:p-5"><div className="animate-pulse h-20 bg-[#1a1443] rounded"></div></div>
+});
 //import { getStrapiURL } from "../../../../utils/api-helpers";
 
 //import fetchStrapiEducationData from "../../../../utils/data/educations_strapi";
 
 const EducationSection = ({ data }) => {
   console.log("educationData new = ", data);
-  const educations = data.strapi_education_data; // Destructure to extract description
+  const educations = data?.strapi_education_data || [];
   //const { url } =personalData.strapi_personal_data.attributes.profile.data.attributes;
   //console.log("educations = ", educations);
   //const pictureURL = getStrapiURL(url);
+
+  if (educations.length === 0) return null;
 
   return (
     <div
