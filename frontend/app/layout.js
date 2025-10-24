@@ -7,6 +7,8 @@ import Navbar from "./components/navbar";
 import "./css/card.scss";
 import "./css/globals.scss";
 import ScrollToTop from "./components/helper/scroll-to-top";
+import { LanguageProvider } from "../contexts/LanguageContext";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
 const inter = Inter({ 
   subsets: ["latin", "cyrillic"],
@@ -36,14 +38,18 @@ export default function RootLayout({ children }) {
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </head>
-      <body className={inter.className + " bg-gray-900 text-white"}>
-        <ToastContainer />
-        <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
-          <Navbar />
-          {children}
-          <ScrollToTop />
-        </main>
-        <Footer />
+      <body className={inter.className}>
+        <ThemeProvider>
+          <LanguageProvider>
+            <ToastContainer />
+            <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
+              <Navbar />
+              {children}
+              <ScrollToTop />
+            </main>
+            <Footer />
+          </LanguageProvider>
+        </ThemeProvider>
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
       </body>
     </html>

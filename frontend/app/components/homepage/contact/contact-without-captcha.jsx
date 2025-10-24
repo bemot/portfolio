@@ -1,12 +1,16 @@
 "use client";
 // @flow strict
 import { isValidEmail } from "../../../../utils/check-email";
-import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
+import { useLanguage } from "../../../../contexts/LanguageContext";
+import { useTranslation } from "../../../../utils/translations";
 
 function ContactWithoutCaptcha({ text_to_client }) {
+  const { locale } = useLanguage();
+  const { t } = useTranslation(locale);
+  
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -34,36 +38,51 @@ function ContactWithoutCaptcha({ text_to_client }) {
       setError({ ...error, required: false });
     }
 
-    const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const options = { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY };
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+    const token = process.env.NEXT_PUBLIC_STRAPI_FORM_SUBMISSION_TOKEN;
 
     try {
-      const res = await emailjs.send(serviceID, templateID, input, options);
+      const res = await fetch(`${strapiUrl}/api/lead-form-submissions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          data: {
+            name: input.name,
+            email: input.email,
+            message: input.message,
+          },
+        }),
+      });
 
-      if (res.status === 200) {
-        toast.success("Message sent successfully!");
+      if (res.ok) {
+        toast.success(t('contact.success'));
         setInput({
           name: "",
           email: "",
           message: "",
         });
+      } else {
+        const errorData = await res.json();
+        toast.error(errorData?.error?.message || t('contact.error'));
       }
     } catch (error) {
-      toast.error(error?.text || error);
+      toast.error(error?.message || t('contact.error'));
     }
   };
 
   return (
     <div className="">
       <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
-        Contact with me
+        {t('contact.title')}
       </p>
       <div className="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
-        <p className="text-sm text-[#d3d8e8]">{text_to_client}</p>
+        <p className="text-sm text-[#d3d8e8]">{text_to_client || t('contact.defaultMessage')}</p>
         <div className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label className="text-base">Your Name: </label>
+            <label className="text-base">{t('contact.nameLabel')} </label>
             <input
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               type="text"
@@ -76,7 +95,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base">Your Email: </label>
+            <label className="text-base">{t('contact.emailLabel')} </label>
             <input
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               type="email"
@@ -91,13 +110,13 @@ function ContactWithoutCaptcha({ text_to_client }) {
             />
             {error.email && (
               <p className="text-sm text-red-400">
-                Please provide a valid email!
+                {t('contact.emailInvalid')}
               </p>
             )}
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base">Your Message: </label>
+            <label className="text-base">{t('contact.messageLabel')} </label>
             <textarea
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               maxLength="500"
@@ -112,7 +131,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
           <div className="flex flex-col items-center gap-2">
             {error.required && (
               <p className="text-sm text-red-400">
-                Email and Message are required!
+                {t('contact.emailRequired')}
               </p>
             )}
             <button
@@ -120,7 +139,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
               role="button"
               onClick={handleSendMail}
             >
-              <span>Send Message</span>
+              <span>{t('contact.sendButton')}</span>
               <TbMailForward className="mt-1" size={18} />
             </button>
           </div>

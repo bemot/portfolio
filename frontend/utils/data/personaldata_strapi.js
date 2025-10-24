@@ -1,6 +1,6 @@
 import { fetchAPI } from "../../utils/fetch-api.tsx";
 
-async function fetchstrapiPersonalData() {
+async function fetchstrapiPersonalData(locale = "en") {
   try {
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const options = { 
@@ -9,7 +9,7 @@ async function fetchstrapiPersonalData() {
     };
     const strapiPersonalDataResponse = await fetchAPI(
       "/personal-data",
-      { populate: "*" },
+      { populate: "*", locale },
       options,
     );
 

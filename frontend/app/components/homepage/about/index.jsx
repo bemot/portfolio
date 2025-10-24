@@ -1,7 +1,13 @@
+"use client";
 import Image from "next/image";
 import { getStrapiURL } from "../../../../utils/api-helpers";
+import { useLanguage } from "../../../../contexts/LanguageContext";
+import { useTranslation } from "../../../../utils/translations";
 
 const AboutSection = ({ data }) => {
+  const { locale } = useLanguage();
+  const { t } = useTranslation(locale);
+  
   //console.log("personalData = ", personalData);
   if (!data?.strapi_personal_data?.attributes) return null;
   
@@ -13,14 +19,14 @@ const AboutSection = ({ data }) => {
     <div id="about" className="my-12 lg:my-16 relative">
       <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">
         <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
-          ABOUT ME
+          {t('about.title')}
         </span>
         <span className="h-36 w-[2px] bg-[#1a1443]"></span>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         <div className="order-2 lg:order-1">
           <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
-            Who I am?
+            {t('about.whoIAm')}
           </p>
           <p className="text-gray-200 text-sm lg:text-lg">{description}</p>
         </div>

@@ -590,6 +590,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -741,53 +788,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
-  info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiEducationEducation extends Schema.CollectionType {
   collectionName: 'educations';
   info: {
@@ -799,11 +799,36 @@ export interface ApiEducationEducation extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    institution: Attribute.String;
-    years: Attribute.String;
-    qualification: Attribute.String;
-    title: Attribute.String;
+    institution: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    years: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    qualification: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -819,6 +844,12 @@ export interface ApiEducationEducation extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::education.education',
+      'oneToMany',
+      'api::education.education'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -832,6 +863,11 @@ export interface ApiExperienceExperience extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
   };
   attributes: {
     time_from_to: Attribute.String;
@@ -853,6 +889,12 @@ export interface ApiExperienceExperience extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::experience.experience',
+      'oneToMany',
+      'api::experience.experience'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -868,6 +910,7 @@ export interface ApiLeadFormSubmissionLeadFormSubmission
     draftAndPublish: true;
   };
   attributes: {
+    name: Attribute.String;
     email: Attribute.Email;
     status: Attribute.Enumeration<['status 1', 'status 2', 'status 3']>;
     theme: Attribute.Enumeration<['theme 1', 'theme 2', 'theme 3']>;
@@ -900,6 +943,11 @@ export interface ApiPersonalDataPersonalData extends Schema.SingleType {
   };
   options: {
     draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
   };
   attributes: {
     name: Attribute.String;
@@ -935,6 +983,12 @@ export interface ApiPersonalDataPersonalData extends Schema.SingleType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::personal-data.personal-data',
+      'oneToMany',
+      'api::personal-data.personal-data'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -948,6 +1002,11 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
   };
   attributes: {
     name: Attribute.String;
@@ -976,6 +1035,12 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::project.project'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -989,6 +1054,11 @@ export interface ApiToolTool extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
     toolname: Attribute.String;
     createdAt: Attribute.DateTime;
@@ -998,6 +1068,12 @@ export interface ApiToolTool extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::tool.tool',
+      'oneToMany',
+      'api::tool.tool'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -1015,10 +1091,10 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
       'api::education.education': ApiEducationEducation;
       'api::experience.experience': ApiExperienceExperience;
       'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;

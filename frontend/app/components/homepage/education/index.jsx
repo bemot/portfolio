@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import { BsPersonWorkspace } from "react-icons/bs";
 import lottieFile from "/public/lottie/study.json";
 import Image from "next/image";
+import { useLanguage } from "../../../../contexts/LanguageContext";
+import { useTranslation } from "../../../../utils/translations";
 
 const AnimationLottie = dynamic(() => import("../../helper/animation-lottie"), {
   ssr: false,
@@ -17,6 +19,9 @@ const GlowCard = dynamic(() => import("../../helper/glow-card"), {
 //import fetchStrapiEducationData from "../../../../utils/data/educations_strapi";
 
 const EducationSection = ({ data }) => {
+  const { locale } = useLanguage();
+  const { t } = useTranslation(locale);
+  
   console.log("educationData new = ", data);
   const educations = data?.strapi_education_data || [];
   //const { url } =personalData.strapi_personal_data.attributes.profile.data.attributes;
@@ -47,7 +52,7 @@ const EducationSection = ({ data }) => {
         <div className="flex  items-center">
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
           <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Educations
+            {t('education.title')}
           </span>
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
         </div>
@@ -65,8 +70,8 @@ const EducationSection = ({ data }) => {
             <div className="flex flex-col gap-6">
               {educations.map((education) => (
                 <GlowCard
-                  key={education.attributes.id}
-                  identifier={`education-${education.attributes.id}`}
+                  key={education.id}
+                  identifier={`education-${education.id}`}
                 >
                   <div className="p-3 relative text-white">
                     <Image

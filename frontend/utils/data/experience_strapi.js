@@ -1,6 +1,6 @@
 import { fetchAPI } from "../../utils/fetch-api.tsx";
 
-async function fetchstrapiExperienceData() {
+async function fetchstrapiExperienceData(locale = "en") {
   try {
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const options = { 
@@ -11,7 +11,8 @@ async function fetchstrapiExperienceData() {
       "/experiences",
       { 
         fields: ['id', 'title', 'company', 'duration'],
-        sort: ['id:desc']
+        sort: ['id:desc'],
+        locale
       },
       options,
     );

@@ -1,9 +1,15 @@
 // @flow strict
+"use client";
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import BlogCard from './blog-card';
+import { useLanguage } from '../../../../contexts/LanguageContext';
+import { useTranslation } from '../../../../utils/translations';
 
 function Blog({ blogs }) {
+  const { locale } = useLanguage();
+  const { t } = useTranslation(locale);
+  
   if (!blogs || blogs.length === 0) return null;
 
   return (
@@ -20,7 +26,7 @@ function Blog({ blogs }) {
         <div className="flex  items-center">
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
           <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Blogs
+            {t('blog.title')}
           </span>
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
         </div>
@@ -41,7 +47,7 @@ function Blog({ blogs }) {
           role="button"
           href="/blog"
         >
-          <span>View More</span>
+          <span>{t('blog.viewMore')}</span>
           <FaArrowRight size={16} />
         </Link>
       </div>

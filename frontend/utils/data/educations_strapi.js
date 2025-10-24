@@ -1,6 +1,6 @@
 import { fetchAPI } from "../../utils/fetch-api.tsx";
 
-async function fetchstrapiEducationData() {
+async function fetchstrapiEducationData(locale = "en") {
   try {
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const options = { 
@@ -9,7 +9,7 @@ async function fetchstrapiEducationData() {
     };
     const strapiEducationDataResponse = await fetchAPI(
       "/educations",
-      { populate: "*" },
+      { populate: "*", locale },
       options,
     );
 

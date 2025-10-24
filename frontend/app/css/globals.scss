@@ -3,18 +3,44 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: rgb(211, 216, 232);
+  --foreground-rgb: 211, 216, 232;
+  --background-color: #0d1224;
+  --card-bg: rgba(31, 41, 55, 0.5);
+  --border-color: rgba(75, 85, 99, 0.3);
+  --text-primary: rgb(211, 216, 232);
+  --text-secondary: rgb(156, 163, 175);
+  --accent-color: #16f2b3;
+  --accent-hover: #14d9a0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-  }
+[data-theme="macchiato"] {
+  --foreground-rgb: 202, 211, 245;
+  --background-color: #24273a;
+  --background-secondary: #1e2030;
+  --card-bg: rgba(54, 58, 79, 0.6);
+  --border-color: rgba(91, 96, 120, 0.4);
+  --text-primary: #cad3f5;
+  --text-secondary: #a5adcb;
+  --accent-color: #c6a0f6;
+  --accent-hover: #b78ff5;
+  --pink: #f5bde6;
+  --mauve: #c6a0f6;
+  --red: #ed8796;
+  --maroon: #ee99a0;
+  --peach: #f5a97f;
+  --yellow: #eed49f;
+  --green: #a6da95;
+  --teal: #8bd5ca;
+  --sky: #91d7e3;
+  --sapphire: #7dc4e4;
+  --blue: #8aadf4;
+  --lavender: #b7bdf8;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #0d1224;
+  color: var(--text-primary);
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #sticky-card-1 {
