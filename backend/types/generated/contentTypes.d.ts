@@ -950,11 +950,36 @@ export interface ApiPersonalDataPersonalData extends Schema.SingleType {
     };
   };
   attributes: {
-    name: Attribute.String;
-    designation: Attribute.String;
-    description: Attribute.Text;
-    phone: Attribute.String;
-    address: Attribute.Text;
+    name: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    designation: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    phone: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    address: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     Github: Attribute.String;
     Facebook: Attribute.String;
     LinkedIn: Attribute.String;
@@ -964,10 +989,30 @@ export interface ApiPersonalDataPersonalData extends Schema.SingleType {
     devUsername: Attribute.String;
     profile: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     email: Attribute.Email;
-    resume: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    skill_1: Attribute.String;
-    skill_2: Attribute.String;
-    text_to_client: Attribute.String;
+    resume: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    skill_1: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    skill_2: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    text_to_client: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
