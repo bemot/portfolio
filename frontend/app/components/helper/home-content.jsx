@@ -28,19 +28,21 @@ export default function HomeContent() {
           Authorization: `Bearer ${token}`,
         };
 
-        const [personalRes, experienceRes, educationRes, projectsRes, blogRes] = await Promise.all([
+        const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, blogRes] = await Promise.all([
           fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/experiences?fields=id,title,company,duration&sort=id:desc&locale=${locale}`, { headers }),
+          fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { headers }),
+          fetch(`${strapiUrl}/api/skills?locale=${locale}`, { headers }),
           fetch("https://dev.to/api/articles?username=said7388", { next: { revalidate: 3600 } }),
         ]);
 
-        const [personal, experience, education, projects, blogs] = await Promise.all([
+        const [personal, experience, education, projects, skills, blogs] = await Promise.all([
           personalRes.json(),
           experienceRes.json(),
           educationRes.json(),
           projectsRes.json(),
+          skillsRes.json(),
           blogRes.json(),
         ]);
 
@@ -48,6 +50,7 @@ export default function HomeContent() {
         console.log('Experience Response:', experience);
         console.log('Education Response:', education);
         console.log('Projects Response:', projects);
+        console.log('Skills Response:', skills);
 
         // Fallback to English if Ukrainian content not available
         let personalData = personal.data;
@@ -63,6 +66,7 @@ export default function HomeContent() {
           experienceData: { strapi_experience_data: experience.data || [] },
           educationData: { strapi_education_data: education.data || [] },
           projectsData: { strapi_projects_data: projects.data || [] },
+          skillsData: { strapi_skills_data: skills.data || [] },
           blogArticles: blogs?.filter((article) => article?.cover_image)?.sort(() => 0.5 - Math.random()) || [],
         });
       } catch (error) {
@@ -88,7 +92,7 @@ export default function HomeContent() {
       <HeroSection data={data.personalData} />
       <AboutSection data={data.personalData} />
       <Experience data={data.experienceData} />
-      <Skills />
+      <Skills data={data.skillsData} />
       <Projects data={data.projectsData} />
       <Education data={data.educationData} />
       <Blog blogs={data.blogArticles} />

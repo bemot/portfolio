@@ -13,16 +13,18 @@ module.exports = {
       "media.dev.to",
       "media2.dev.to",
       "dev-to-uploads.s3.amazonaws.com",
+      "cdn.simpleicons.org",
+      "cdn-icons-png.flaticon.com",
     ],
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
   },
   compress: true,
   swcMinify: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === "production",
   },
   experimental: {
-    optimizePackageImports: ['react-icons', 'lottie-react'],
+    optimizePackageImports: ["react-icons", "lottie-react"],
   },
 };
 
