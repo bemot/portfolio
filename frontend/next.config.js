@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  productionBrowserSourceMaps: false,
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
