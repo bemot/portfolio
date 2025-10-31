@@ -1,5 +1,5 @@
-import Spinner from "./components/spinner";
+import SkeletonLoader from "./components/helper/skeleton-loader";
 
 export default function Loading() {
-  return <Spinner />;
+  return <SkeletonLoader />;
 }

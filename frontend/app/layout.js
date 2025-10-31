@@ -9,6 +9,8 @@ import "./css/globals.scss";
 import ScrollToTop from "./components/helper/scroll-to-top";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import { ThemeProvider } from "../contexts/ThemeContext";
+import ErrorBoundary from "./components/helper/error-boundary";
+import ScrollProgress from "./components/helper/scroll-progress";
 
 const inter = Inter({ 
   subsets: ["latin", "cyrillic"],
@@ -39,18 +41,23 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider>
-          <LanguageProvider>
-            <ToastContainer />
-            <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
-              <Navbar />
-              {children}
-              <ScrollToTop />
-            </main>
-            <Footer />
-          </LanguageProvider>
-        </ThemeProvider>
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
+        <ErrorBoundary>
+          <ThemeProvider>
+            <LanguageProvider>
+              <ScrollProgress />
+              <ToastContainer />
+              <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
+                <Navbar />
+                {children}
+                <ScrollToTop />
+              </main>
+              <Footer />
+            </LanguageProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
+        {process.env.NEXT_PUBLIC_GTM && (
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
+        )}
       </body>
     </html>
   );

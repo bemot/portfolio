@@ -6,15 +6,18 @@ import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { useLanguage } from "../../../../contexts/LanguageContext";
 import { useTranslation } from "../../../../utils/translations";
+import Confetti from "../../helper/confetti";
 
 function ContactWithoutCaptcha({ text_to_client }) {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
+  const [showConfetti, setShowConfetti] = useState(false);
   
   const [input, setInput] = useState({
     name: "",
     email: "",
     message: "",
+    theme: "",
   });
   const [error, setError] = useState({
     email: false,
@@ -22,14 +25,14 @@ function ContactWithoutCaptcha({ text_to_client }) {
   });
 
   const checkRequired = () => {
-    if (input.email && input.message && input.name) {
+    if (input.email && input.message && input.name && input.theme) {
       setError({ ...error, required: false });
     }
   };
 
   const handleSendMail = async (e) => {
     e.preventDefault();
-    if (!input.email || !input.message || !input.name) {
+    if (!input.email || !input.message || !input.name || !input.theme) {
       setError({ ...error, required: true });
       return;
     } else if (error.email) {
@@ -53,16 +56,20 @@ function ContactWithoutCaptcha({ text_to_client }) {
             name: input.name,
             email: input.email,
             message: input.message,
+            theme: input.theme,
           },
         }),
       });
 
       if (res.ok) {
         toast.success(t('contact.success'));
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 5000);
         setInput({
           name: "",
           email: "",
           message: "",
+          theme: "",
         });
       } else {
         const errorData = await res.json();
@@ -75,6 +82,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
 
   return (
     <div className="">
+      <Confetti trigger={showConfetti} />
       <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
         {t('contact.title')}
       </p>
@@ -113,6 +121,22 @@ function ContactWithoutCaptcha({ text_to_client }) {
                 {t('contact.emailInvalid')}
               </p>
             )}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-base">{t('contact.themeLabel')} </label>
+            <select
+              className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
+              required={true}
+              onChange={(e) => setInput({ ...input, theme: e.target.value })}
+              onBlur={checkRequired}
+              value={input.theme}
+            >
+              <option value="">{t('contact.selectTheme')}</option>
+              <option value="message">{t('contact.themeMessage')}</option>
+              <option value="proposition">{t('contact.themeProposition')}</option>
+              <option value="business request">{t('contact.themeBusinessRequest')}</option>
+            </select>
           </div>
 
           <div className="flex flex-col gap-2">

@@ -9,10 +9,7 @@ const ProjectsSection = ({ data }) => {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
   
-  console.log("projectsData = ", data);
   const projects = data?.strapi_projects_data || [];
-  //console.log("projects = ", projects);
-  //const pictureURL = getStrapiURL(url);
 
   if (projects.length === 0) return null;
 

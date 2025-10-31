@@ -16,21 +16,24 @@ import ContactWithoutCaptcha from "./contact-without-captcha";
 
 //import fetchStrapiPersonalData from "../../../../utils/data/personaldata_strapi"; // Adjust the import path as needed
 
-const ContactSection = ({ data }) => {
-  //console.log("personalData = ", personalData);
-  if (!data?.strapi_personal_data?.attributes) return null;
+const ContactSection = ({ personalData, contactFormData }) => {
+  if (!personalData?.strapi_personal_data?.attributes) return null;
   
   const {
-    email,
-    phone,
-    address,
     Facebook,
     Github,
     twitter,
     LinkedIn,
     text_to_client,
-  } = data.strapi_personal_data.attributes;
-  console.log(text_to_client);
+  } = personalData.strapi_personal_data.attributes;
+
+  // Get contact form data from Strapi or fallback to personal data
+  const contactData = contactFormData?.strapi_contact_form_data?.attributes || {};
+  const email = contactData.email || personalData.strapi_personal_data.attributes.email;
+  const phone = contactData.phone || personalData.strapi_personal_data.attributes.phone;
+  const address = contactData.address || personalData.strapi_personal_data.attributes.address;
+  const welcomeText = contactData.welcome_text || text_to_client;
+  
   return (
     <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
       <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
@@ -42,9 +45,9 @@ const ContactSection = ({ data }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY &&
           process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY ? (
-          <ContactWithCaptcha text_to_client={text_to_client} />
+          <ContactWithCaptcha text_to_client={welcomeText} />
         ) : (
-          <ContactWithoutCaptcha text_to_client={text_to_client} />
+          <ContactWithoutCaptcha text_to_client={welcomeText} />
         )}
 
         <div className="lg:w-3/4 ">

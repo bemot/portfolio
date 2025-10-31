@@ -1,11 +1,15 @@
 // @flow strict
 
 import * as React from "react";
+import Image from "next/image";
+import { getStrapiURL } from "../../../../utils/api-helpers";
 
 function ProjectCard({ project }) {
-  console.log("project from card === ", project);
   const { name, description, role, tools, code, demo, image } = project;
-  console.log("name = ", project.attributes.name);
+  
+  // Get image URL from Strapi
+  const imageUrl = project.attributes.image?.data?.attributes?.url;
+  const imageFullUrl = imageUrl ? getStrapiURL(imageUrl) : null;
   return (
     <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full">
       <div className="flex flex-row">
@@ -66,6 +70,21 @@ function ProjectCard({ project }) {
             </span>
             <span className="text-gray-400">,</span>
           </div>
+          
+          {imageFullUrl && (
+            <div className="ml-4 lg:ml-8 mr-2 my-4">
+              <div className="relative w-full h-48 sm:h-64 md:h-72 rounded-lg overflow-hidden border-2 border-violet-500/30 hover:border-[#16f2b3] transition-all duration-300">
+                <Image
+                  src={imageFullUrl}
+                  alt={project.attributes.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          )}
+          
           <div>
             <span className="text-gray-400">{`};`}</span>
           </div>

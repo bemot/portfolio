@@ -18,12 +18,10 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     setMounted(true);
     const savedLocale = localStorage.getItem("locale") || "en";
-    console.log("Loading locale from localStorage:", savedLocale);
     setLocale(savedLocale);
   }, []);
 
   const changeLocale = (newLocale) => {
-    console.log("Changing locale to:", newLocale);
     setLocale(newLocale);
     localStorage.setItem("locale", newLocale);
     window.location.reload();

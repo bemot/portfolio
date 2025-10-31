@@ -10,7 +10,6 @@ function Skills({ data }) {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
   
-  console.log("skillsData = ", data);
   const skills = data?.strapi_skills_data || [];
   
   // Extract skill data from Strapi (Strapi v4 format: attributes)
@@ -67,14 +66,16 @@ function Skills({ data }) {
                     </div>
                   </div>
                   <div className="flex flex-col items-center justify-center gap-3 p-6">
-                    <div className="h-8 sm:h-10">
+                    <div className="h-8 sm:h-10 w-auto">
                       {iconSrc ? (
                         <Image
                           src={iconSrc}
                           alt={skill.name}
                           width={40}
                           height={40}
-                          className="h-full w-auto rounded-lg"
+                          style={{ width: 'auto', height: '100%', maxHeight: '100%' }}
+                          sizes="40px"
+                          className="rounded-lg"
                         />
                       ) : (
                         <div className="text-violet-500 text-2xl font-bold">

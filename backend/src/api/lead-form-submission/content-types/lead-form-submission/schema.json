@@ -4,7 +4,8 @@
   "info": {
     "singularName": "lead-form-submission",
     "pluralName": "lead-form-submissions",
-    "displayName": "Lead form submission"
+    "displayName": "Lead form submission",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -28,9 +29,9 @@
     "theme": {
       "type": "enumeration",
       "enum": [
-        "theme 1",
-        "theme 2",
-        "theme 3"
+        "message",
+        "proposition",
+        "business request"
       ]
     },
     "message": {

@@ -36,6 +36,7 @@ const AboutSection = ({ data }) => {
             width={290}
             height={290}
             alt="Profile Picture"
+            style={{ width: 'auto', height: 'auto' }}
             className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
           />
         </div>

@@ -4,7 +4,6 @@ import { FaCode, FaPlay } from "react-icons/fa";
 import placeholder from "/public/png/placeholder.png";
 
 const SingleProject = ({ project }) => {
-  console.log("project from SingleProject = ", project);
   const { name, description, tools, code, demo, image, features } = project;
 
   return (

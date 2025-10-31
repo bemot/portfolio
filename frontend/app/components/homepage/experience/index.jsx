@@ -5,6 +5,8 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import experience from "/public/lottie/code.json";
 import { useLanguage } from "../../../../contexts/LanguageContext";
 import { useTranslation } from "../../../../utils/translations";
+import { useState } from "react";
+import { getStrapiMedia } from "../../../../utils/api-helpers";
 
 const AnimationLottie = dynamic(() => import("../../helper/animation-lottie"), {
   ssr: false,
@@ -21,11 +23,9 @@ const GlowCard = dynamic(() => import("../../helper/glow-card"), {
 const ExperienceSection = ({ data }) => {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
+  const [selectedPicture, setSelectedPicture] = useState(null);
   
-  console.log("experienceData = ", data);
   const experiences = data?.strapi_experience_data || [];
-  console.log("experiences = ", experiences);
-  //const pictureURL = getStrapiURL(url);
 
   if (experiences.length === 0) return null;
 
@@ -62,47 +62,95 @@ const ExperienceSection = ({ data }) => {
 
           <div>
             <div className="flex flex-col gap-6">
-              {experiences.map((experience) => (
-                <GlowCard
-                  key={experience.id}
-                  identifier={`experience-${experience.id}`}
-                >
-                  <div className="p-3 relative">
-                    <Image
-                      src="/blur-23.svg"
-                      alt="Hero"
-                      width={1080}
-                      height={200}
-                      className="absolute bottom-0 opacity-80"
-                    />
-                    <div className="flex justify-center">
-                      <p className="text-xs sm:text-sm text-[#16f2b3]">
-                        {experience.attributes.time_from_to}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-x-8 px-3 py-5">
-                      <div className="text-violet-500  transition-all duration-300 hover:scale-125">
-                        <BsPersonWorkspace size={36} />
-                      </div>
-                      <div>
-                        <p className="text-base sm:text-xl mb-2 font-medium uppercase">
-                          {experience.attributes.place}
-                        </p>
-                        <p className="text-sm sm:text-base font-medium uppercase">
-                          {experience.attributes.position}
-                        </p>
-                        <p className="text-base sm:text-xl mb-2 font-small">
-                          {experience.attributes.jobs}
+              {experiences.map((experience) => {
+                const pictureUrl = experience.attributes.picture?.data?.attributes?.url;
+                const pictureFullUrl = pictureUrl ? getStrapiMedia(pictureUrl) : null;
+                
+                return (
+                  <GlowCard
+                    key={experience.id}
+                    identifier={`experience-${experience.id}`}
+                  >
+                    <div 
+                      className={`p-3 relative text-white ${pictureFullUrl ? 'cursor-pointer' : ''}`}
+                      onClick={() => pictureFullUrl && setSelectedPicture(pictureFullUrl)}
+                    >
+                      <Image
+                        src="/blur-23.svg"
+                        alt="Hero"
+                        width={1080}
+                        height={200}
+                        className="absolute bottom-0 opacity-80"
+                      />
+                      <div className="flex justify-center">
+                        <p className="text-xs sm:text-sm text-[#16f2b3]">
+                          {experience.attributes.time_from_to}
                         </p>
                       </div>
+                      <div className="flex items-center gap-x-8 px-3 py-5">
+                        <div className="text-violet-500  transition-all duration-300 hover:scale-125">
+                          <BsPersonWorkspace size={36} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-base sm:text-xl mb-2 font-medium uppercase">
+                            {experience.attributes.place}
+                          </p>
+                          <p className="text-sm sm:text-base font-medium uppercase">
+                            {experience.attributes.position}
+                          </p>
+                          <p className="text-base sm:text-xl mb-2 font-small">
+                            {experience.attributes.jobs}
+                          </p>
+                        </div>
+                        {pictureFullUrl && (
+                          <div className="flex-shrink-0">
+                            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 border-violet-500 hover:border-[#16f2b3] transition-all duration-300 hover:scale-110">
+                              <Image
+                                src={pictureFullUrl}
+                                alt="Experience picture"
+                                fill
+                                sizes="(max-width: 640px) 64px, 80px"
+                                className="object-cover"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </GlowCard>
-              ))}
+                  </GlowCard>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Picture Modal */}
+      {selectedPicture && (
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-80 p-4"
+          onClick={() => setSelectedPicture(null)}
+        >
+          <div className="relative max-w-5xl max-h-[90vh] w-full">
+            <button
+              onClick={() => setSelectedPicture(null)}
+              className="absolute -top-10 right-0 text-white text-3xl hover:text-[#16f2b3] transition-colors"
+            >
+              ✕
+            </button>
+            <div className="relative w-full h-full">
+              <Image
+                src={selectedPicture}
+                alt="Experience picture"
+                width={1200}
+                height={800}
+                className="w-full h-auto rounded-lg"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
