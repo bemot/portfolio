@@ -1009,7 +1009,7 @@ export interface ApiLeadFormSubmissionLeadFormSubmission
   attributes: {
     name: Attribute.String;
     email: Attribute.Email;
-    status: Attribute.Enumeration<['status 1', 'status 2', 'status 3']>;
+    status: Attribute.Enumeration<['read', 'answered', 'spam']>;
     theme: Attribute.Enumeration<
       ['message', 'proposition', 'business request']
     >;
