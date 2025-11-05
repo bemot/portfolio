@@ -12,7 +12,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
   const [showConfetti, setShowConfetti] = useState(false);
-  
+
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -62,7 +62,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
       });
 
       if (res.ok) {
-        toast.success(t('contact.success'));
+        toast.success(t("contact.success"));
         setShowConfetti(true);
         setTimeout(() => setShowConfetti(false), 5000);
         setInput({
@@ -73,10 +73,10 @@ function ContactWithoutCaptcha({ text_to_client }) {
         });
       } else {
         const errorData = await res.json();
-        toast.error(errorData?.error?.message || t('contact.error'));
+        toast.error(errorData?.error?.message || t("contact.error"));
       }
     } catch (error) {
-      toast.error(error?.message || t('contact.error'));
+      toast.error(error?.message || t("contact.error"));
     }
   };
 
@@ -84,13 +84,13 @@ function ContactWithoutCaptcha({ text_to_client }) {
     <div className="">
       <Confetti trigger={showConfetti} />
       <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
-        {t('contact.title')}
+        {t("contact.title")}
       </p>
       <div className="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
-        <p className="text-sm text-[#d3d8e8]">{text_to_client || t('contact.defaultMessage')}</p>
+        <p className="text-sm text-[#d3d8e8]">{t("contact.defaultMessage")}</p>
         <div className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label className="text-base">{t('contact.nameLabel')} </label>
+            <label className="text-base">{t("contact.nameLabel")} </label>
             <input
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               type="text"
@@ -103,7 +103,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base">{t('contact.emailLabel')} </label>
+            <label className="text-base">{t("contact.emailLabel")} </label>
             <input
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               type="email"
@@ -118,13 +118,13 @@ function ContactWithoutCaptcha({ text_to_client }) {
             />
             {error.email && (
               <p className="text-sm text-red-400">
-                {t('contact.emailInvalid')}
+                {t("contact.emailInvalid")}
               </p>
             )}
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base">{t('contact.themeLabel')} </label>
+            <label className="text-base">{t("contact.themeLabel")} </label>
             <select
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               required={true}
@@ -132,15 +132,19 @@ function ContactWithoutCaptcha({ text_to_client }) {
               onBlur={checkRequired}
               value={input.theme}
             >
-              <option value="">{t('contact.selectTheme')}</option>
-              <option value="message">{t('contact.themeMessage')}</option>
-              <option value="proposition">{t('contact.themeProposition')}</option>
-              <option value="business request">{t('contact.themeBusinessRequest')}</option>
+              <option value="">{t("contact.selectTheme")}</option>
+              <option value="message">{t("contact.themeMessage")}</option>
+              <option value="proposition">
+                {t("contact.themeProposition")}
+              </option>
+              <option value="business request">
+                {t("contact.themeBusinessRequest")}
+              </option>
             </select>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-base">{t('contact.messageLabel')} </label>
+            <label className="text-base">{t("contact.messageLabel")} </label>
             <textarea
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               maxLength="500"
@@ -155,7 +159,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
           <div className="flex flex-col items-center gap-2">
             {error.required && (
               <p className="text-sm text-red-400">
-                {t('contact.emailRequired')}
+                {t("contact.emailRequired")}
               </p>
             )}
             <button
@@ -163,7 +167,7 @@ function ContactWithoutCaptcha({ text_to_client }) {
               role="button"
               onClick={handleSendMail}
             >
-              <span>{t('contact.sendButton')}</span>
+              <span>{t("contact.sendButton")}</span>
               <TbMailForward className="mt-1" size={18} />
             </button>
           </div>

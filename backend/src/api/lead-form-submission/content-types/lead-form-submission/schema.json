@@ -21,9 +21,9 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "status 1",
-        "status 2",
-        "status 3"
+        "read",
+        "answered",
+        "spam"
       ]
     },
     "theme": {
