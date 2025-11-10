@@ -1,17 +1,23 @@
 // @flow strict
 
+"use client";
+
 import * as React from "react";
 import Image from "next/image";
 import { getStrapiURL } from "../../../../utils/api-helpers";
+import ProjectModal from "./project-modal";
 
 function ProjectCard({ project }) {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { name, description, role, tools, code, demo, image } = project;
   
   // Get image URL from Strapi
   const imageUrl = project.attributes.image?.data?.attributes?.url;
   const imageFullUrl = imageUrl ? getStrapiURL(imageUrl) : null;
+  
   return (
-    <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full">
+    <>
+    <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_0_rgba(22,242,179,0.3)] hover:border-[#16f2b3]/50" onClick={() => setIsModalOpen(true)}>
       <div className="flex flex-row">
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
         <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
@@ -72,8 +78,8 @@ function ProjectCard({ project }) {
           </div>
           
           {imageFullUrl && (
-            <div className="ml-4 lg:ml-8 mr-2 my-4">
-              <div className="relative w-full h-48 sm:h-64 md:h-72 rounded-lg overflow-hidden border-2 border-violet-500/30 hover:border-[#16f2b3] transition-all duration-300">
+            <div className="ml-4 lg:ml-8 mr-2 my-4 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative w-full h-48 sm:h-64 md:h-72 rounded-lg overflow-hidden border-2 border-violet-500/30 hover:border-[#16f2b3] transition-all duration-300 cursor-pointer">
                 <Image
                   src={imageFullUrl}
                   alt={project.attributes.name}
@@ -91,6 +97,13 @@ function ProjectCard({ project }) {
         </code>
       </div>
     </div>
+    
+    <ProjectModal 
+      project={project} 
+      isOpen={isModalOpen} 
+      onClose={() => setIsModalOpen(false)} 
+    />
+    </>
   );
 }
 
