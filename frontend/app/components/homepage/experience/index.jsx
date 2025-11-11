@@ -23,7 +23,7 @@ const GlowCard = dynamic(() => import("../../helper/glow-card"), {
 const ExperienceSection = ({ data }) => {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
-  const [selectedPicture, setSelectedPicture] = useState(null);
+  const [selectedExperience, setSelectedExperience] = useState(null);
   
   const experiences = data?.strapi_experience_data || [];
 
@@ -72,8 +72,8 @@ const ExperienceSection = ({ data }) => {
                     identifier={`experience-${experience.id}`}
                   >
                     <div 
-                      className={`p-3 relative text-white ${pictureFullUrl ? 'cursor-pointer' : ''}`}
-                      onClick={() => pictureFullUrl && setSelectedPicture(pictureFullUrl)}
+                      className="p-3 relative text-white cursor-pointer"
+                      onClick={() => setSelectedExperience(experience)}
                     >
                       <Image
                         src="/blur-23.svg"
@@ -125,28 +125,72 @@ const ExperienceSection = ({ data }) => {
         </div>
       </div>
 
-      {/* Picture Modal */}
-      {selectedPicture && (
+      {/* Experience Modal */}
+      {selectedExperience && (
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-80 p-4"
-          onClick={() => setSelectedPicture(null)}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-90 p-4"
+          onClick={() => setSelectedExperience(null)}
         >
-          <div className="relative max-w-5xl max-h-[90vh] w-full">
+          <div 
+            className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto bg-[#0d1224] border border-[#1b2c68a0] rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              onClick={() => setSelectedPicture(null)}
-              className="absolute -top-10 right-0 text-white text-3xl hover:text-[#16f2b3] transition-colors"
+              onClick={() => setSelectedExperience(null)}
+              className="sticky top-4 float-right mr-4 text-white text-3xl hover:text-[#16f2b3] transition-colors z-10"
             >
               ✕
             </button>
-            <div className="relative w-full h-full">
-              <Image
-                src={selectedPicture}
-                alt="Experience picture"
-                width={1200}
-                height={800}
-                className="w-full h-auto rounded-lg"
-                onClick={(e) => e.stopPropagation()}
-              />
+            
+            <div className="p-8">
+              {/* Content Section */}
+              <div className="text-white space-y-4">
+                <div className="text-center mb-6">
+                  <p className="text-sm text-[#16f2b3] mb-2">
+                    {selectedExperience.attributes.time_from_to}
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="text-violet-500">
+                    <BsPersonWorkspace size={48} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2 text-[#16f2b3]">
+                      {selectedExperience.attributes.place}
+                    </h3>
+                    <p className="text-xl font-medium uppercase text-violet-400">
+                      {selectedExperience.attributes.position}
+                    </p>
+                  </div>
+                </div>
+                
+                {selectedExperience.attributes.jobs && (
+                  <div className="mt-6">
+                    <h4 className="text-lg font-semibold text-[#16f2b3] mb-3">
+                      {t('experience.responsibilities') || 'Responsibilities'}:
+                    </h4>
+                    <p className="text-base leading-relaxed whitespace-pre-wrap">
+                      {selectedExperience.attributes.jobs}
+                    </p>
+                  </div>
+                )}
+              </div>
+              
+              {/* Image Section */}
+              {selectedExperience.attributes.picture?.data?.attributes?.url && (
+                <div className="mt-6 flex justify-center">
+                  <div className="relative w-full max-w-2xl rounded-lg overflow-hidden border-2 border-violet-500">
+                    <Image
+                      src={getStrapiMedia(selectedExperience.attributes.picture.data.attributes.url)}
+                      alt="Experience picture"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

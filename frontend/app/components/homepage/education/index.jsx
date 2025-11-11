@@ -22,7 +22,7 @@ import { getStrapiMedia } from "../../../../utils/api-helpers";
 const EducationSection = ({ data }) => {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
-  const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [selectedEducation, setSelectedEducation] = useState(null);
   
   const educations = data?.strapi_education_data || [];
 
@@ -76,8 +76,8 @@ const EducationSection = ({ data }) => {
                     identifier={`education-${education.id}`}
                   >
                     <div 
-                      className={`p-3 relative text-white ${certificateFullUrl ? 'cursor-pointer' : ''}`}
-                      onClick={() => certificateFullUrl && setSelectedCertificate(certificateFullUrl)}
+                      className="p-3 relative text-white cursor-pointer"
+                      onClick={() => setSelectedEducation(education)}
                     >
                       <Image
                         src="/blur-23.svg"
@@ -126,28 +126,61 @@ const EducationSection = ({ data }) => {
         </div>
       </div>
 
-      {/* Certificate Modal */}
-      {selectedCertificate && (
+      {/* Education Modal */}
+      {selectedEducation && (
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-80 p-4"
-          onClick={() => setSelectedCertificate(null)}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-90 p-4"
+          onClick={() => setSelectedEducation(null)}
         >
-          <div className="relative max-w-5xl max-h-[90vh] w-full">
+          <div 
+            className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto bg-[#0d1224] border border-[#1b2c68a0] rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              onClick={() => setSelectedCertificate(null)}
-              className="absolute -top-10 right-0 text-white text-3xl hover:text-[#16f2b3] transition-colors"
+              onClick={() => setSelectedEducation(null)}
+              className="sticky top-4 float-right mr-4 text-white text-3xl hover:text-[#16f2b3] transition-colors z-10"
             >
               ✕
             </button>
-            <div className="relative w-full h-full">
-              <Image
-                src={selectedCertificate}
-                alt="Certificate"
-                width={1200}
-                height={800}
-                className="w-full h-auto rounded-lg"
-                onClick={(e) => e.stopPropagation()}
-              />
+            
+            <div className="p-8">
+              {/* Content Section */}
+              <div className="text-white space-y-4">
+                <div className="text-center mb-6">
+                  <p className="text-sm text-[#16f2b3] mb-2">
+                    {selectedEducation.attributes.years}
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="text-violet-500">
+                    <BsPersonWorkspace size={48} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2 text-[#16f2b3]">
+                      {selectedEducation.attributes.qualification}
+                    </h3>
+                    <p className="text-xl text-violet-400">
+                      {selectedEducation.attributes.institution}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Certificate Image Section */}
+              {selectedEducation.attributes.certificate?.data?.attributes?.url && (
+                <div className="mt-6 flex justify-center">
+                  <div className="relative w-full max-w-2xl rounded-lg overflow-hidden border-2 border-violet-500">
+                    <Image
+                      src={getStrapiMedia(selectedEducation.attributes.certificate.data.attributes.url)}
+                      alt="Certificate"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

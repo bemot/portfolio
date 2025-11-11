@@ -72,22 +72,6 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto px-6 lg:px-10 py-6 lg:py-8">
-          {/* Image */}
-          {imageFullUrl && (
-            <div className="mb-8">
-              <div className="relative w-full h-72 md:h-[500px] rounded-xl overflow-hidden border-2 border-violet-500/40 shadow-xl">
-                <Image
-                  src={imageFullUrl}
-                  alt={project.attributes.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 90vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-          )}
-
           {/* Project Details */}
           <div className="space-y-6">
             {/* Tools */}
@@ -118,7 +102,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             </div>
 
             {/* Description */}
-            <div className="pb-4">
+            <div>
               <h3 className="text-[#16f2b3] text-xl font-bold mb-3">
                 Description
               </h3>
@@ -127,6 +111,22 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               </p>
             </div>
           </div>
+
+          {/* Image */}
+          {imageFullUrl && (
+            <div className="mt-8 pb-4">
+              <div className="relative w-full h-72 md:h-[500px] rounded-xl overflow-hidden border-2 border-violet-500/40 shadow-xl">
+                <Image
+                  src={imageFullUrl}
+                  alt={project.attributes.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 90vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
