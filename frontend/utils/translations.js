@@ -7,43 +7,47 @@ export const translations = {
       education: "EDUCATION",
       blogs: "BLOGS",
       projects: "PROJECTS",
-      contact: "CONTACT"
+      contact: "CONTACT",
     },
     hero: {
       hello: "Hello,",
       thisIs: "This is",
       imA: "I'm a",
       contactMe: "Contact me",
-      getResume: "Get Resume"
+      getResume: "Get Resume",
     },
     about: {
       title: "ABOUT ME",
-      whoIAm: "Who I am?"
+      whoIAm: "Who I am?",
     },
     skills: {
-      title: "Skills"
+      title: "Skills",
     },
     experience: {
-      title: "Experiences"
+      title: "Experiences",
     },
     education: {
-      title: "Educations"
+      title: "Educations",
     },
     projects: {
-      title: "PROJECTS"
+      title: "PROJECTS",
+    },
+    certificates: {
+      title: "CERTIFICATES",
     },
     blog: {
       title: "Blogs",
-      viewMore: "View More"
+      viewMore: "View More",
     },
     footer: {
-      copyright: "© Developer Portfolio by",
+      copyright: "© Portfolio of",
       star: "Star",
-      fork: "Fork"
+      fork: "Fork",
     },
     contact: {
       title: "Contact with me",
-      defaultMessage: "If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests.",
+      defaultMessage:
+        "If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests.",
       nameLabel: "Your Name:",
       emailLabel: "Your Email:",
       themeLabel: "Theme:",
@@ -58,8 +62,8 @@ export const translations = {
       captchaError: "Please complete the captcha!",
       captchaFailed: "Captcha verification failed!",
       success: "Message sent successfully!",
-      error: "Failed to send message"
-    }
+      error: "Failed to send message",
+    },
   },
   uk: {
     nav: {
@@ -69,43 +73,47 @@ export const translations = {
       education: "ОСВІТА",
       blogs: "БЛОГИ",
       projects: "ПРОЄКТИ",
-      contact: "КОНТАКТИ"
+      contact: "КОНТАКТИ",
     },
     hero: {
       hello: "Вітаю,",
       thisIs: "Це",
       imA: "Я",
       contactMe: "Зв'язатися зі мною",
-      getResume: "Отримати резюме"
+      getResume: "Отримати резюме",
     },
     about: {
       title: "ПРО МЕНЕ",
-      whoIAm: "Хто я?"
+      whoIAm: "Хто я?",
     },
     skills: {
-      title: "Навички"
+      title: "Навички",
     },
     experience: {
-      title: "Досвід роботи"
+      title: "Досвід роботи",
     },
     education: {
-      title: "Освіта"
+      title: "Освіта",
     },
     projects: {
-      title: "ПРОЄКТИ"
+      title: "ПРОЄКТИ",
+    },
+    certificates: {
+      title: "СЕРТИФІКАТИ",
     },
     blog: {
       title: "Блоги",
-      viewMore: "Переглянути більше"
+      viewMore: "Переглянути більше",
     },
     footer: {
       copyright: "© Портфоліо розробника від",
       star: "Зірка",
-      fork: "Форк"
+      fork: "Форк",
     },
     contact: {
       title: "Зв'яжіться зі мною",
-      defaultMessage: "Якщо у вас є запитання чи зауваження, будь ласка, не соромтеся зв'язатися зі мною. Я відкритий до будь-яких можливостей роботи, які відповідають моїм навичкам та інтересам.",
+      defaultMessage:
+        "Якщо у вас є запитання чи зауваження, будь ласка, не соромтеся зв'язатися зі мною. Я відкритий до будь-яких можливостей роботи, які відповідають моїм навичкам та інтересам.",
       nameLabel: "Ваше ім'я:",
       emailLabel: "Ваш email:",
       themeLabel: "Тема:",
@@ -120,8 +128,8 @@ export const translations = {
       captchaError: "Будь ласка, пройдіть капчу!",
       captchaFailed: "Перевірка капчі не вдалася!",
       success: "Повідомлення успішно надіслано!",
-      error: "Не вдалося надіслати повідомлення"
-    }
+      error: "Не вдалося надіслати повідомлення",
+    },
   },
   de: {
     nav: {
@@ -131,43 +139,47 @@ export const translations = {
       education: "BILDUNG",
       blogs: "BLOGS",
       projects: "PROJEKTE",
-      contact: "KONTAKT"
+      contact: "KONTAKT",
     },
     hero: {
       hello: "Hallo,",
       thisIs: "Das ist",
       imA: "Ich bin",
       contactMe: "Kontaktiere mich",
-      getResume: "Lebenslauf herunterladen"
+      getResume: "Lebenslauf herunterladen",
     },
     about: {
       title: "ÜBER MICH",
-      whoIAm: "Wer bin ich?"
+      whoIAm: "Wer bin ich?",
     },
     skills: {
-      title: "Fähigkeiten"
+      title: "Fähigkeiten",
     },
     experience: {
-      title: "Berufserfahrung"
+      title: "Berufserfahrung",
     },
     education: {
-      title: "Bildung"
+      title: "Bildung",
     },
     projects: {
-      title: "PROJEKTE"
+      title: "PROJEKTE",
+    },
+    certificates: {
+      title: "ZERTIFIKATE",
     },
     blog: {
       title: "Blogs",
-      viewMore: "Mehr ansehen"
+      viewMore: "Mehr ansehen",
     },
     footer: {
       copyright: "© Entwickler-Portfolio von",
       star: "Stern",
-      fork: "Fork"
+      fork: "Fork",
     },
     contact: {
       title: "Kontaktieren Sie mich",
-      defaultMessage: "Wenn Sie Fragen oder Anliegen haben, zögern Sie bitte nicht, mich zu kontaktieren. Ich bin offen für alle Arbeitsmöglichkeiten, die meinen Fähigkeiten und Interessen entsprechen.",
+      defaultMessage:
+        "Wenn Sie Fragen oder Anliegen haben, zögern Sie bitte nicht, mich zu kontaktieren. Ich bin offen für alle Arbeitsmöglichkeiten, die meinen Fähigkeiten und Interessen entsprechen.",
       nameLabel: "Ihr Name:",
       emailLabel: "Ihre E-Mail:",
       themeLabel: "Thema:",
@@ -182,25 +194,25 @@ export const translations = {
       captchaError: "Bitte füllen Sie das Captcha aus!",
       captchaFailed: "Captcha-Überprüfung fehlgeschlagen!",
       success: "Nachricht erfolgreich gesendet!",
-      error: "Nachricht konnte nicht gesendet werden"
-    }
-  }
+      error: "Nachricht konnte nicht gesendet werden",
+    },
+  },
 };
 
 export const useTranslation = (locale) => {
   const t = (key) => {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let value = translations[locale] || translations.en;
-    
+
     for (const k of keys) {
       value = value?.[k];
       if (value === undefined) {
         return key;
       }
     }
-    
+
     return value;
   };
-  
+
   return { t };
 };

@@ -56,42 +56,55 @@ const HeroSection = ({ data }) => {
           </h1>
 
           <div className="my-12 flex items-center gap-5">
-            <Link
-              href={Github}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsGithub size={30} />
-            </Link>
+            {Github && (
+              <Link
+                href={Github}
+                target="_blank"
+                className="transition-all text-pink-500 hover:scale-125 duration-300"
+              >
+                <BsGithub size={30} />
+              </Link>
+            )}
 
-            <Link
-              href={LinkedIn}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsLinkedin size={30} />
-            </Link>
-            <Link
-              href={Facebook}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaFacebook size={30} />
-            </Link>
-            <Link
-              href={leetcode}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <SiLeetcode size={30} />
-            </Link>
-            <Link
-              href={twitter}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaTwitterSquare size={30} />
-            </Link>
+            {LinkedIn && (
+              <Link
+                href={LinkedIn}
+                target="_blank"
+                className="transition-all text-pink-500 hover:scale-125 duration-300"
+              >
+                <BsLinkedin size={30} />
+              </Link>
+            )}
+            
+            {Facebook && (
+              <Link
+                href={Facebook}
+                target="_blank"
+                className="transition-all text-pink-500 hover:scale-125 duration-300"
+              >
+                <FaFacebook size={30} />
+              </Link>
+            )}
+            
+            {leetcode && (
+              <Link
+                href={leetcode}
+                target="_blank"
+                className="transition-all text-pink-500 hover:scale-125 duration-300"
+              >
+                <SiLeetcode size={30} />
+              </Link>
+            )}
+            
+            {twitter && (
+              <Link
+                href={twitter}
+                target="_blank"
+                className="transition-all text-pink-500 hover:scale-125 duration-300"
+              >
+                <FaTwitterSquare size={30} />
+              </Link>
+            )}
 
             <div className="flex items-center gap-3">
               <Link

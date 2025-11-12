@@ -852,6 +852,42 @@ export interface ApiContactFormContactForm extends Schema.SingleType {
   };
 }
 
+export interface ApiCourseraCetificatCourseraCetificat
+  extends Schema.CollectionType {
+  collectionName: 'coursera_cetificats';
+  info: {
+    singularName: 'coursera-cetificat';
+    pluralName: 'coursera-cetificats';
+    displayName: 'cetificate';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    certificate_name: Attribute.String & Attribute.Required;
+    picture: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    provider: Attribute.String;
+    institution: Attribute.String;
+    link: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::coursera-cetificat.coursera-cetificat',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::coursera-cetificat.coursera-cetificat',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEducationEducation extends Schema.CollectionType {
   collectionName: 'educations';
   info: {
@@ -1214,28 +1250,14 @@ export interface ApiSkillSkill extends Schema.CollectionType {
     singularName: 'skill';
     pluralName: 'skills';
     displayName: 'skill';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
-    skillname: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    iconUrl: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
+    skillname: Attribute.String;
+    iconUrl: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1251,12 +1273,6 @@ export interface ApiSkillSkill extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::skill.skill',
-      'oneToMany',
-      'api::skill.skill'
-    >;
-    locale: Attribute.String;
   };
 }
 
@@ -1266,14 +1282,10 @@ export interface ApiToolTool extends Schema.CollectionType {
     singularName: 'tool';
     pluralName: 'tools';
     displayName: 'tool';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
   };
   attributes: {
     toolname: Attribute.String;
@@ -1284,12 +1296,6 @@ export interface ApiToolTool extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::tool.tool',
-      'oneToMany',
-      'api::tool.tool'
-    >;
-    locale: Attribute.String;
   };
 }
 
@@ -1312,6 +1318,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::contact-form.contact-form': ApiContactFormContactForm;
+      'api::coursera-cetificat.coursera-cetificat': ApiCourseraCetificatCourseraCetificat;
       'api::education.education': ApiEducationEducation;
       'api::experience.experience': ApiExperienceExperience;
       'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;

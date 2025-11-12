@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coursera_cetificats",
+  "info": {
+    "singularName": "coursera-cetificat",
+    "pluralName": "coursera-cetificats",
+    "displayName": "cetificate",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "certificate_name": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "pluginOptions": {}
+    },
+    "provider": {
+      "type": "string"
+    },
+    "institution": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

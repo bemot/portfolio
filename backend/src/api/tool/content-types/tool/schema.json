@@ -4,16 +4,13 @@
   "info": {
     "singularName": "tool",
     "pluralName": "tools",
-    "displayName": "tool"
+    "displayName": "tool",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "toolname": {
       "type": "string"

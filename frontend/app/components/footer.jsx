@@ -9,7 +9,7 @@ import { useTranslation } from "../../utils/translations";
 function Footer() {
   const { locale } = useLanguage();
   const { t } = useTranslation(locale);
-  
+
   return (
     <div className="relative border-t bg-[#0d1224] border-[#353951] text-white">
       <div className="mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] py-6 lg:py-10">
@@ -18,13 +18,13 @@ function Footer() {
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <p className="text-sm">
-            {t('footer.copyright')}{" "}
+            {t("footer.copyright")}{" "}
             <Link
               target="_blank"
               href="https://www.linkedin.com/in/bemot/"
               className="text-[#16f2b3]"
             >
-              Sasha Bemotoff
+              Oleksandr Hrybyniuk
             </Link>
           </p>
           <div className="flex items-center gap-5">
@@ -34,7 +34,7 @@ function Footer() {
               className="flex items-center gap-2 uppercase hover:text-[#16f2b3]"
             >
               <IoStar />
-              <span>{t('footer.star')}</span>
+              <span>{t("footer.star")}</span>
             </Link>
             <Link
               target="_blank"
@@ -42,7 +42,7 @@ function Footer() {
               className="flex items-center gap-2 uppercase hover:text-[#16f2b3]"
             >
               <CgGitFork />
-              <span>{t('footer.fork')}</span>
+              <span>{t("footer.fork")}</span>
             </Link>
           </div>
         </div>

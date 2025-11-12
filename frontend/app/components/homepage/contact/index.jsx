@@ -25,6 +25,7 @@ const ContactSection = ({ personalData, contactFormData }) => {
     twitter,
     LinkedIn,
     text_to_client,
+    StackOverflow,
   } = personalData.strapi_personal_data.attributes;
 
   // Get contact form data from Strapi or fallback to personal data
@@ -75,36 +76,50 @@ const ContactSection = ({ personalData, contactFormData }) => {
             </p>
           </div>
           <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
-            <Link target="_blank" href={Github}>
-              <IoLogoGithub
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href={LinkedIn}>
-              <BiLogoLinkedin
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href={twitter}>
-              <FaXTwitter
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href="FaStackOverflow">
-              <FaStackOverflow
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href={Facebook}>
-              <FaFacebook
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
+            {Github && (
+              <Link target="_blank" href={Github}>
+                <IoLogoGithub
+                  className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                  size={48}
+                />
+              </Link>
+            )}
+            
+            {LinkedIn && (
+              <Link target="_blank" href={LinkedIn}>
+                <BiLogoLinkedin
+                  className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                  size={48}
+                />
+              </Link>
+            )}
+            
+            {twitter && (
+              <Link target="_blank" href={twitter}>
+                <FaXTwitter
+                  className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                  size={48}
+                />
+              </Link>
+            )}
+            
+            {StackOverflow && (
+              <Link target="_blank" href={StackOverflow}>
+                <FaStackOverflow
+                  className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                  size={48}
+                />
+              </Link>
+            )}
+            
+            {Facebook && (
+              <Link target="_blank" href={Facebook}>
+                <FaFacebook
+                  className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                  size={48}
+                />
+              </Link>
+            )}
           </div>
         </div>
       </div>

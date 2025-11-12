@@ -19,13 +19,13 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Portfolio of Sasha Bemotoff - Scientist",
+  title: "Portfolio of Oleksandr Hrybyniuk - Scientist",
   description:
-    "This is the portfolio of Sasha Bemotoff. I am a scientific researcher.",
-  keywords: "portfolio, scientist, researcher, Sasha Bemotoff",
+    "This is the portfolio of Oleksandr Hrybyniuk. I am a scientific researcher.",
+  keywords: "portfolio, scientist, researcher, Oleksandr Hrybyniuk",
   openGraph: {
-    title: "Portfolio of Sasha Bemotoff - Scientist",
-    description: "This is the portfolio of Sasha Bemotoff. I am a scientific researcher.",
+    title: "Portfolio of Oleksandr Hrybyniuk - Scientist",
+    description: "This is the portfolio of Oleksandr Hrybyniuk. I am a scientific researcher.",
     type: "website",
   },
 };

@@ -5,6 +5,7 @@ import AboutSection from "../homepage/about";
 import Experience from "../homepage/experience";
 import Skills from "../homepage/skills";
 import Projects from "../homepage/projects";
+import Certificates from "../homepage/certificates";
 import Education from "../homepage/education";
 // import Blog from "../homepage/blog"; // Temporarily disabled
 import ContactSection from "../homepage/contact";
@@ -28,23 +29,25 @@ export default function HomeContent() {
           Authorization: `Bearer ${token}`,
         };
 
-        const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes] = await Promise.all([
+        const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes, certificatesRes] = await Promise.all([
           fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/skills?locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/contact-form?locale=${locale}`, { headers }),
+          fetch(`${strapiUrl}/api/coursera-cetificats?populate=*&locale=${locale}`, { headers }),
           // fetch("https://dev.to/api/articles?username=said7388", { next: { revalidate: 3600 } }), // Temporarily disabled
         ]);
 
-        const [personal, experience, education, projects, skills, contactForm] = await Promise.all([
+        const [personal, experience, education, projects, skills, contactForm, certificates] = await Promise.all([
           personalRes.json(),
           experienceRes.json(),
           educationRes.json(),
           projectsRes.json(),
           skillsRes.json(),
           contactFormRes.json(),
+          certificatesRes.json(),
           // blogRes.json(), // Temporarily disabled
         ]);
 
@@ -63,6 +66,7 @@ export default function HomeContent() {
           projectsData: { strapi_projects_data: projects.data || [] },
           skillsData: { strapi_skills_data: skills.data || [] },
           contactFormData: { strapi_contact_form_data: contactForm.data },
+          certificatesData: { strapi_certificates_data: certificates.data || [] },
           // blogArticles: blogs?.filter((article) => article?.cover_image)?.sort(() => 0.5 - Math.random()) || [], // Temporarily disabled
         });
       } catch (error) {
@@ -96,6 +100,9 @@ export default function HomeContent() {
       </FadeInSection>
       <FadeInSection delay={0.1}>
         <Projects data={data.projectsData} />
+      </FadeInSection>
+      <FadeInSection delay={0.1}>
+        <Certificates data={data.certificatesData} />
       </FadeInSection>
       {/* <Blog blogs={data.blogArticles} /> */} {/* Temporarily disabled */}
       <FadeInSection delay={0.1}>
