@@ -1257,7 +1257,7 @@ export interface ApiSkillSkill extends Schema.CollectionType {
   };
   attributes: {
     skillname: Attribute.String;
-    iconUrl: Attribute.String;
+    local_icon: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

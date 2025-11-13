@@ -11,6 +11,7 @@ async function fetchStrapiSkillsData(locale = "en") {
       "/skills",
       { 
         fields: ['id', 'skillname'],
+        populate: 'local_icon',
         sort: ['id:asc'],
         locale
       },

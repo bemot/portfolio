@@ -11,12 +11,29 @@ function Skills({ data }) {
   const { t } = useTranslation(locale);
   
   const skills = data?.strapi_skills_data || [];
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
   
   // Extract skill data from Strapi (Strapi v4 format: attributes)
-  const skillsData = skills.map(skill => ({
-    name: skill.attributes?.skillname || skill.skillname,
-    iconUrl: skill.attributes?.iconUrl || skill.iconUrl
-  })).filter(skill => skill.name);
+  const skillsData = skills.map(skill => {
+    const attributes = skill.attributes || skill;
+    const localIcon = attributes.local_icon?.data?.[0]?.attributes || attributes.local_icon?.[0]?.attributes;
+    let iconUrl = localIcon?.url || null;
+    
+    // Prepend Strapi URL if the icon URL is relative
+    if (iconUrl && !iconUrl.startsWith('http')) {
+      iconUrl = `${strapiUrl}${iconUrl}`;
+    }
+    
+    // Debug logging
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Skill:', attributes.skillname, 'Icon URL:', iconUrl, 'Local Icon Data:', attributes.local_icon);
+    }
+    
+    return {
+      name: attributes.skillname,
+      iconUrl: iconUrl
+    };
+  }).filter(skill => skill.name);
   
   return (
     <div

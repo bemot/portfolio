@@ -34,7 +34,7 @@ export default function HomeContent() {
           fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/skills?locale=${locale}`, { headers }),
+          fetch(`${strapiUrl}/api/skills?populate=local_icon&locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/contact-form?locale=${locale}`, { headers }),
           fetch(`${strapiUrl}/api/coursera-cetificats?populate=*&locale=${locale}`, { headers }),
           // fetch("https://dev.to/api/articles?username=said7388", { next: { revalidate: 3600 } }), // Temporarily disabled

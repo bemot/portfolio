@@ -16,9 +16,16 @@
       "type": "string",
       "pluginOptions": {}
     },
-    "iconUrl": {
-      "type": "string",
-      "pluginOptions": {}
+    "local_icon": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
