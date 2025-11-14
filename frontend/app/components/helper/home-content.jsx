@@ -25,9 +25,8 @@ export default function HomeContent() {
         const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
         const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
         
-        const headers = {
-          Authorization: `Bearer ${token}`,
-        };
+        // Only include Authorization header if token exists
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes, certificatesRes] = await Promise.all([
           fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers }),
