@@ -1,0 +1,2 @@
+Validating /Users/sashabemotoff/Coding/MYPORTFOLIO/MY_PORTFOLIO/fly.toml
+[32m✓[0m Configuration is valid

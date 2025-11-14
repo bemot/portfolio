@@ -1,0 +1,10 @@
+node_modules
+.tmp
+.cache
+.env
+.git
+.gitignore
+*.md
+.strapi
+.strapi-updater.json
+export_*.tar.gz.enc

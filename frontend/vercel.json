@@ -1,0 +1,17 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_STRAPI_URL": "@next_public_strapi_url",
+    "NEXT_PUBLIC_APP_URL": "@next_public_app_url",
+    "NEXT_PUBLIC_EMAILJS_SERVICE_ID": "@next_public_emailjs_service_id",
+    "NEXT_PUBLIC_EMAILJS_TEMPLATE_ID": "@next_public_emailjs_template_id",
+    "NEXT_PUBLIC_EMAILJS_PUBLIC_KEY": "@next_public_emailjs_public_key",
+    "NEXT_PUBLIC_GTM": "@next_public_gtm",
+    "NEXT_PUBLIC_RECAPTCHA_SITE_KEY": "@next_public_recaptcha_site_key",
+    "NEXT_PUBLIC_RECAPTCHA_SECRET_KEY": "@next_public_recaptcha_secret_key"
+  }
+}

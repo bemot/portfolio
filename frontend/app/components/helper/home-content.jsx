@@ -1,4 +1,5 @@
 "use client";
+// Fixed: Token is now optional for public API access
 import { useLanguage } from "../../../contexts/LanguageContext";
 import HeroSection from "../homepage/hero-section";
 import AboutSection from "../homepage/about";
