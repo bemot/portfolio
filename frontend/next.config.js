@@ -2,6 +2,9 @@ const path = require("path");
 
 module.exports = {
   productionBrowserSourceMaps: false,
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
@@ -10,6 +13,7 @@ module.exports = {
       "localhost",
       "localhost:1337",
       "127.0.0.1",
+      "my-portfolio-dawn-glade-2810.fly.dev",
       "res.cloudinary.com",
       "media.dev.to",
       "media2.dev.to",
