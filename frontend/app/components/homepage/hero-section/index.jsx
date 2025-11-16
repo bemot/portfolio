@@ -51,7 +51,7 @@ const HeroSection = ({ data }) => {
           <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
             {t('hero.hello')}<br />
             {t('hero.thisIs')} <span className=" text-pink-500">{name}</span>
-            {`, ${t('hero.imA')} `}
+            {` ${t('hero.imA')} `}
             <span className=" text-[#16f2b3]">{designation}</span>.
           </h1>
 
