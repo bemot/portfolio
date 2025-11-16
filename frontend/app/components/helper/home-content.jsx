@@ -27,16 +27,21 @@ export default function HomeContent() {
         const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
         
         // Only include Authorization header if token exists
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const headers = token ? { 
+          Authorization: `Bearer ${token}`,
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        } : {
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        };
 
         const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes, certificatesRes] = await Promise.all([
-          fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/skills?populate=local_icon&locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/contact-form?locale=${locale}`, { headers }),
-          fetch(`${strapiUrl}/api/coursera-cetificats?populate=*&locale=${locale}`, { headers }),
+          fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/skills?populate=local_icon&locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/contact-form?locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/coursera-cetificats?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
           // fetch("https://dev.to/api/articles?username=said7388", { next: { revalidate: 3600 } }), // Temporarily disabled
         ]);
 

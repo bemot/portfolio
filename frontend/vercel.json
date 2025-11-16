@@ -4,6 +4,17 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
   "env": {
     "NEXT_PUBLIC_STRAPI_URL": "@next_public_strapi_url",
     "NEXT_PUBLIC_APP_URL": "@next_public_app_url",
