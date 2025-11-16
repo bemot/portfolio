@@ -2,6 +2,9 @@ const path = require("path");
 
 module.exports = {
   productionBrowserSourceMaps: false,
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
   eslint: {
     ignoreDuringBuilds: false,
   },
