@@ -10,7 +10,7 @@ export const translations = {
       contact: "CONTACT",
     },
     hero: {
-      hello: "Hello,",
+      hello: "Hello",
       thisIs: "This is",
       imA: "I'm a",
       contactMe: "Contact me",
@@ -76,7 +76,7 @@ export const translations = {
       contact: "КОНТАКТИ",
     },
     hero: {
-      hello: "Вітаю,",
+      hello: "Вітаю",
       thisIs: "Це",
       imA: "Я",
       contactMe: "Зв'язатися зі мною",
@@ -142,7 +142,7 @@ export const translations = {
       contact: "KONTAKT",
     },
     hero: {
-      hello: "Hallo,",
+      hello: "Hallo",
       thisIs: "Das ist",
       imA: "Ich bin",
       contactMe: "Kontaktiere mich",
