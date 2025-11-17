@@ -29,7 +29,10 @@ module.exports = ({ env }) => [
         const requestOrigin = ctx.request.header.origin;
         
         // Allow all Vercel preview deployments
-        if (requestOrigin && requestOrigin.match(/^https:\/\/.*-bemots-projects\.vercel\.app$/)) {
+        if (requestOrigin && (
+          requestOrigin.match(/^https:\/\/.*-bemots-projects\.vercel\.app$/) ||
+          requestOrigin.match(/^https:\/\/portfolio-.*\.vercel\.app$/)
+        )) {
           return requestOrigin;
         }
         
