@@ -42,14 +42,12 @@ function ContactWithoutCaptcha({ text_to_client }) {
     }
 
     const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-    const token = process.env.NEXT_PUBLIC_STRAPI_FORM_SUBMISSION_TOKEN;
 
     try {
       const res = await fetch(`${strapiUrl}/api/lead-form-submissions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           data: {
