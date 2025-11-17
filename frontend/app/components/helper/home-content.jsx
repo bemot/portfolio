@@ -28,11 +28,8 @@ export default function HomeContent() {
         
         // Only include Authorization header if token exists
         const headers = token ? { 
-          Authorization: `Bearer ${token}`,
-          'Cache-Control': 'no-cache, no-store, must-revalidate'
-        } : {
-          'Cache-Control': 'no-cache, no-store, must-revalidate'
-        };
+          Authorization: `Bearer ${token}`
+        } : {};
 
         const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes, certificatesRes] = await Promise.all([
           fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),

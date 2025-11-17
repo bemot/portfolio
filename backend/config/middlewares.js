@@ -19,6 +19,7 @@ module.exports = ({ env }) => [
     name: 'strapi::cors',
     config: {
       enabled: true,
+      headers: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Cache-Control'],
       origin: (ctx) => {
         const allowedOrigins = [
           'http://localhost:3000',
