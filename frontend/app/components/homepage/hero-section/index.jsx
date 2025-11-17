@@ -232,3 +232,4 @@ const HeroSection = ({ data }) => {
 
 export default HeroSection;
 // Cache bust 1763316583
+// Force rebuild Пн 17 лист. 2025 03:34:10 CET
