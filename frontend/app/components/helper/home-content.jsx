@@ -30,12 +30,10 @@ export default function HomeContent() {
         console.log('🔍 DEBUG: Token exists?', !!token);
         console.log('🔍 DEBUG: Locale:', locale);
         
-        // Only include Authorization header if token exists
-        const headers = token ? { 
-          Authorization: `Bearer ${token}`
-        } : {};
+        // TEMPORARILY disable token to test
+        const headers = {};
 
-        console.log('🔍 DEBUG: Headers:', headers);
+        console.log('🔍 DEBUG: Headers (token disabled for testing):', headers);
 
         const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes, certificatesRes] = await Promise.all([
           fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
