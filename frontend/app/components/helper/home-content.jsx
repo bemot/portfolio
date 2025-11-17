@@ -24,37 +24,17 @@ export default function HomeContent() {
       setLoading(true);
       try {
         const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-        const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-        
-        console.log('🔍 DEBUG: Strapi URL:', strapiUrl);
-        console.log('🔍 DEBUG: Token exists?', !!token);
-        console.log('🔍 DEBUG: Locale:', locale);
-        
-        // TEMPORARILY disable token to test
-        const headers = {};
-
-        console.log('🔍 DEBUG: Headers (token disabled for testing):', headers);
 
         const [personalRes, experienceRes, educationRes, projectsRes, skillsRes, contactFormRes, certificatesRes] = await Promise.all([
-          fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
-          fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { headers, cache: 'no-store' }),
-          fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
-          fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
-          fetch(`${strapiUrl}/api/skills?populate=local_icon&locale=${locale}`, { headers, cache: 'no-store' }),
-          fetch(`${strapiUrl}/api/contact-form?locale=${locale}`, { headers, cache: 'no-store' }),
-          fetch(`${strapiUrl}/api/coursera-cetificats?populate=*&locale=${locale}`, { headers, cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/personal-data?populate=*&locale=${locale}`, { cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/experiences?populate=*&sort=id:desc&locale=${locale}`, { cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/educations?populate=*&locale=${locale}`, { cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/projects?populate=*&locale=${locale}`, { cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/skills?populate=local_icon&locale=${locale}`, { cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/contact-form?locale=${locale}`, { cache: 'no-store' }),
+          fetch(`${strapiUrl}/api/coursera-cetificats?populate=*&locale=${locale}`, { cache: 'no-store' }),
           // fetch("https://dev.to/api/articles?username=said7388", { next: { revalidate: 3600 } }), // Temporarily disabled
         ]);
-
-        console.log('🔍 DEBUG: Response statuses:', {
-          personal: personalRes.status,
-          experience: experienceRes.status,
-          education: educationRes.status,
-          projects: projectsRes.status,
-          skills: skillsRes.status,
-          contactForm: contactFormRes.status,
-          certificates: certificatesRes.status
-        });
 
         const [personal, experience, education, projects, skills, contactForm, certificates] = await Promise.all([
           personalRes.json(),
@@ -67,19 +47,10 @@ export default function HomeContent() {
           // blogRes.json(), // Temporarily disabled
         ]);
 
-        console.log('🔍 DEBUG: Parsed data:', {
-          personalData: personal?.data,
-          experienceCount: experience?.data?.length,
-          educationCount: education?.data?.length,
-          projectsCount: projects?.data?.length,
-          skillsCount: skills?.data?.length
-        });
-
         // Fallback to English if Ukrainian content not available
         let personalData = personal.data;
         if (!personalData && locale === 'uk') {
-          console.log('⚠️ DEBUG: No Ukrainian content, fetching English fallback...');
-          const fallbackRes = await fetch(`${strapiUrl}/api/personal-data?populate=*&locale=en`, { headers });
+          const fallbackRes = await fetch(`${strapiUrl}/api/personal-data?populate=*&locale=en`);
           const fallbackData = await fallbackRes.json();
           personalData = fallbackData.data;
         }
@@ -94,13 +65,10 @@ export default function HomeContent() {
           certificatesData: { strapi_certificates_data: certificates.data || [] },
           // blogArticles: blogs?.filter((article) => article?.cover_image)?.sort(() => 0.5 - Math.random()) || [], // Temporarily disabled
         });
-        console.log('✅ DEBUG: Data set successfully!');
       } catch (error) {
-        console.error('❌ DEBUG: Error fetching data:', error);
-        console.error('❌ DEBUG: Error details:', error.message);
+        // Error fetching data - will show loading state
       } finally {
         setLoading(false);
-        console.log('🏁 DEBUG: Fetch complete, loading set to false');
       }
     };
 
