@@ -143,8 +143,8 @@ export const translations = {
     },
     hero: {
       hello: "Hallo",
-      thisIs: "Das ist",
-      imA: "Ich bin",
+      thisIs: "Ich bin",
+      imA: "ein",
       contactMe: "Kontaktiere mich",
       getResume: "Lebenslauf herunterladen",
     },
